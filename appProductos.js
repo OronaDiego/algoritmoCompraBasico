@@ -1,6 +1,8 @@
 
 // **********Variables Globales **********
 let resumenCompra = "";
+let productosFinal = "";
+let valorTotal = 0;
 let carrito = 0;
 let seguirComprando = false;
 
@@ -29,7 +31,7 @@ function eleccionProductos(){
 
     switch (producto) {
         case 1:
-            return validarBaterias(prompt("Tenemos disponibles: DW - LUDWIG - SONOR").toUpperCase());
+            return validarBaterias(prompt("Tenemos disponibles: DW - LUDWING - SONOR").toUpperCase());
         case 2:
             return validarPlatillos(prompt("Tenemos disponibles: PAISTE - ZILDJIAN - ISTANBUL").toUpperCase());
         case 3:
@@ -46,7 +48,7 @@ function eleccionProductos(){
 //                         *****Validación de productos ******
 
 function validarBaterias(seleccion) {
-    if (seleccion === "DW" || seleccion === "LUDWIG" || seleccion === "SONOR") {
+    if ((seleccion === "DW") || (seleccion === "LUDWING") || (seleccion === "SONOR")) {
         return seleccion;
     } else {
         alert("Error: Producto no disponible. Por favor, seleccione uno válido.");
@@ -55,7 +57,7 @@ function validarBaterias(seleccion) {
 }
 
 function validarPlatillos(seleccion) {
-    if (seleccion === "PAISTE" || seleccion === "ZILDJIAN" || seleccion === "ISTANBUL") {
+    if ((seleccion === "PAISTE") || (seleccion === "ZILDJIAN") || (seleccion === "ISTANBUL")) {
         return seleccion;
     } else {
         alert("Error: Producto no disponible. Por favor, seleccione uno válido.");
@@ -64,7 +66,7 @@ function validarPlatillos(seleccion) {
 }
 
 function validarRedoblantes(seleccion) {
-    if (seleccion === "DW COLLECTORS" || seleccion === "LUDWIG SUPRAPHONIC" || seleccion === "GRETSCH") {
+    if ((seleccion === "DW COLLECTORS") || (seleccion === "LUDWING SUPRAPHONIC") || (seleccion === "GRETSCH")) {
         return seleccion;
     } else {
         alert("Error: Producto no disponible. Por favor, seleccione uno válido.");
@@ -73,7 +75,7 @@ function validarRedoblantes(seleccion) {
 }
 
 function validarPedales(seleccion) {
-    if (seleccion === "DW500" || seleccion === "IRON COBRA" || seleccion === "PEARL500") {
+    if ((seleccion === "DW500") || (seleccion === "IRON COBRA") || (seleccion === "PEARL500")) {
         return seleccion;
     } else {
         alert("Error: Producto no disponible. Por favor, seleccione uno válido.");
@@ -102,10 +104,10 @@ function precioProducto (){
         case "ZILDJIAN":
             precio = 2300;
             break;
-        case "ESTAMBUL":
+        case "ISTANBUL":
             precio = 2400;
             break;
-        case "DW COLECTORS":
+        case "DW COLLECTORS":
             precio = 3200;
             break;
         case "LUDWING SUPRAPHONIC":
@@ -120,7 +122,7 @@ function precioProducto (){
         case "IRON COBRA":
             precio = 4300;
             break;
-        case "PERAL500":
+        case "PEARL500":
             precio = 4400;
             break;
         default:
@@ -129,6 +131,9 @@ function precioProducto (){
     }
     return precio;
 }
+
+
+
 
 //          ******************** Operacion de compra ****************************
 
@@ -140,8 +145,7 @@ function comprar(){
         
         if((compra === "si") || (compra === "")){
             alert("Compra realizada con exito del producto "+producto+" por $ "+ precio+ "USD")
-            resumenCompra = "Resumen de su compra por $ "+ precio +"usd del producto "+ producto
-            
+            resumenCompra = "Resumen de su compra por $ "+ precio +"usd del producto "+ producto                     
         }else if(compra === null){
             alert("has cancelado la compra")
         }else{
@@ -153,13 +157,14 @@ function comprar(){
 
         if(seguirComprando === true){
             eleccionProductos()
+            
         }else if((seguirComprando === false) && (compra === "no")){
             alert("Aun tienes un producto en el carrito")
             seguirComprando = confirm("Quieres terminar la compra?")
             if(seguirComprando === true){
                 compraCarrito()
             }else{
-                alert("Guardaremos el producto para cuando vuelvas! \n Gracias por su visita")
+                alert("Guardaremos el producto para cuando vuelvas! \nGracias por su visita")
                 carrito = 0;
             }
         }
@@ -187,10 +192,12 @@ const compraCarrito =()=>{
 }
 
 
+
 let producto = eleccionProductos();
 console.log("producto seleccionado : "+producto);
 let precio = precioProducto()
 console.log("Costo del producto: $"+precio);
+console.log(resumenCompra);
 
 
 //         ******Compruebo si producto y precio no estan vacios ******
@@ -211,65 +218,3 @@ if(carrito === 1){
         alert("Esperamos verte pronto!")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// do{
-//     productos = prompt("Elija los productos que desea comprar \n 1-Baterias \n 2-Platillos \n 3-Redoblantes \n 4-Pedales").toUpperCase();
-//     cantProductos = parseInt(prompt("Ingrese la cantidad del producto seleccionado"))
-
-    
-//     while(isNaN(cantProductos)){
-//         alert("Debe ingresar un numero valido")
-//         cantProductos = parseInt(prompt("Ingrese la cantidad del producto seleccionado"))
-//     }
-
-//     switch (productos) {
-//         case "1":
-//             precio = 2000000;
-//             break;
-//         case "2":
-//             precio = 90000;
-//             break
-//         case "3":
-//             precio = 900000;
-//             break
-//         case "4":
-//             precio = 100000;
-//             break
-//         default:
-//             alert("El producto "+ productos +" no se encuentra disponible");
-//             break;
-//     }
-
-
-
-//     seguirComprando = confirm("Desea seguir comprando?")
-
-    
-//     valorTotal += precio * cantProductos;
-//     totalProductos += cantProductos;
-    
-// }while(seguirComprando)
-
-// alert("Usted esta llevando: " + totalProductos + productos.toLowerCase() + "\n El valor total a pagar es de: $"+ valorTotal)
-// alert("Gracias por elegirnos");

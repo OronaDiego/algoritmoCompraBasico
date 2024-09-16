@@ -1,6 +1,6 @@
 
 // **********Variables Globales **********
-let resumenCompra = "";
+let resumenCompra = [];
 let productosFinal = "";
 let valorTotal = 0;
 let carrito = 0;
@@ -145,7 +145,8 @@ function comprar(){
         
         if((compra === "si") || (compra === "")){
             alert("Compra realizada con exito del producto "+producto+" por $ "+ precio+ "USD")
-            resumenCompra = "Resumen de su compra por $ "+ precio +"usd del producto "+ producto                     
+            resumenCompra.push(producto,precio)
+            
         }else if(compra === null){
             alert("has cancelado la compra")
         }else{
@@ -156,7 +157,9 @@ function comprar(){
         seguirComprando = confirm("Desea relizar otra compra ?")
 
         if(seguirComprando === true){
-            eleccionProductos()
+            //eleccionProductos()
+            producto = eleccionProductos(); // Actualizar producto
+            precio = precioProducto(producto); // Obtener el nuevo precio
             
         }else if((seguirComprando === false) && (compra === "no")){
             alert("Aun tienes un producto en el carrito")
@@ -182,7 +185,9 @@ const compraCarrito =()=>{
     let compraCarrito = prompt("Quieres comprar "+ producto+"?")
     if(compraCarrito === "" || compraCarrito === "si"){
         alert("Felicidades el "+producto+"es tuyo \nGracias por tu compra!! \nVuelve pronto!")
+        resumenCompra.push(producto)
         seguirComprando = false;
+        carrito = 0;
     }else{
         alert("Gracias por tu visita, vuelve pronto!")
         seguirComprando = false;
@@ -197,7 +202,7 @@ let producto = eleccionProductos();
 console.log("producto seleccionado : "+producto);
 let precio = precioProducto()
 console.log("Costo del producto: $"+precio);
-console.log(resumenCompra);
+
 
 
 //         ******Compruebo si producto y precio no estan vacios ******
@@ -218,3 +223,4 @@ if(carrito === 1){
         alert("Esperamos verte pronto!")
     }
 }
+console.log("resumen de su compra: "+ resumenCompra);
